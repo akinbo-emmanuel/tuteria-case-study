@@ -20,6 +20,7 @@ jobs:
       #   run: npm run test
 
       - name: Deploy to Vercel
+        if: success()
         uses: amondnet/vercel-action@v25
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
