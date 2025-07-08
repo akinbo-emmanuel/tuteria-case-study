@@ -104,4 +104,4 @@ Auto-deployed to [Vercel](https://vercel.com/) via GitHub Actions on push to `ma
 ## 👨‍💻 Author
 
 **Emmanuel Akinbo**
-[LinkedIn](https://linkedin.com/in/emmanuel-akinbo) • [GitHub](https://github.com/skinbo-emmanuel)
+[LinkedIn](https://linkedin.com/in/emmanuel-akinbo) • [GitHub](https://github.com/akinbo-emmanuel)
