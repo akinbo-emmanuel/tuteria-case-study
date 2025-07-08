@@ -22,9 +22,9 @@ export async function POST(req: Request) {
     let data;
     try {
       data = await req.json();
-    } catch (err) {
+    } catch (err: any) {
       return NextResponse.json(
-        { success: false, error: "Invalid JSON payload." },
+        { success: false, error: err?.message || "Invalid JSON payload." },
         { status: 400 }
       );
     }
