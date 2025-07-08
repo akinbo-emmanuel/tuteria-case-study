@@ -3,6 +3,22 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --color-primary: #00b386;
+  --color-secondary: #f4f4f4;
+  --color-accent: #00554c;
+  --color-text: #1a1a1a;
+}
+
+.text-primary {
+  color: var(--color-primary);
+}
+
+.bg-primary {
+  background-color: var(--color-primary);
+}
+
+.border-primary {
+  border-color: var(--color-primary);
 }
 
 @theme inline {
