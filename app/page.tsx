@@ -40,7 +40,7 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-white text-gray-900 p-8 max-w-xl mx-auto">
+    <main className="min-h-screen bg-white text-gray-900 p-8 max-w-md mx-auto">
       <h1 className="text-3xl font-bold mb-6 text-primary">
         Referral Email Sender
       </h1>
@@ -53,25 +53,43 @@ export default function Home() {
           "referralAmount",
           "email",
         ].map((field) => (
-          <input
-            key={field}
-            type="text"
-            name={field}
-            placeholder={field.replace(/([A-Z])/g, " $1")}
-            value={(formData as any)[field]}
-            onChange={handleChange}
-            className="w-full border p-2 rounded"
-            required
-          />
+          <div key={field}>
+            <label
+              htmlFor={field}
+              className="block text-sm font-medium text-gray-700 capitalize"
+            >
+              {field.replace(/([A-Z])/g, " $1")}
+            </label>
+            <input
+              id={field}
+              type="text"
+              name={field}
+              placeholder={field.replace(/([A-Z])/g, " $1")}
+              value={(formData as any)[field]}
+              onChange={handleChange}
+              className="w-full border p-2 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+              required
+            />
+          </div>
         ))}
         <button
           type="submit"
-          className="bg-primary text-white px-4 py-2 rounded"
+          className="bg-primary text-white px-4 py-2 rounded hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary disabled:opacity-60"
           disabled={loading}
         >
           {loading ? "Sending..." : "Send Email"}
         </button>
-        {status && <p className="text-sm text-gray-700 mt-2">{status}</p>}
+        {status && (
+          <p
+            className={`text-sm mt-2 ${
+              status.toLowerCase().includes("success")
+                ? "text-green-600"
+                : "text-red-600"
+            }`}
+          >
+            {status}
+          </p>
+        )}
       </form>
     </main>
   );
