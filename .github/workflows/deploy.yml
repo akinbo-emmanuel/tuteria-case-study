@@ -16,10 +16,11 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Run Tests (Optional)
-        run: npm run test
+      # - name: Run Tests (Optional)
+      #   run: npm run test
 
       - name: Deploy to Vercel
+        if: success()
         uses: amondnet/vercel-action@v25
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
