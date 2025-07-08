@@ -1,36 +1,107 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📩 Tuteria Case Study
 
-## Getting Started
+A full-stack application built with **Next.js**, **Supabase**, and **Postmark** that allows users to send referral emails using a predefined template. The app is automatically deployed using **GitHub Actions** and hosted on **Vercel**.
 
-First, run the development server:
+---
+
+## 🚀 Features
+
+- Send referral emails via Postmark
+- Store referral data in Supabase
+- API route built with Next.js App Router
+- Responsive UI with Tailwind CSS
+- Auto-deployment using GitHub Actions
+- Bonus: Pre-deployment testing (Jest)
+
+---
+
+## 🛠 Tech Stack
+
+- **Frontend**: Next.js 14, Tailwind CSS
+- **Backend**: Supabase (PostgreSQL + API)
+- **Email Service**: Postmark (Template-based)
+- **CI/CD**: GitHub Actions + Vercel
+
+---
+
+## 📦 Setup Instructions
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/skinbo-emmanuel/tuteria-case-study.git
+cd tuteria-case-study
+````
+
+### 2. Install Dependencies
+
+```bash
+npm install
+```
+
+### 3. Environment Variables
+
+Create a `.env.local` file and add:
+
+```env
+SUPABASE_URL=your-supabase-url
+SUPABASE_ANON_KEY=your-supabase-anon-key
+POSTMARK_API_KEY=your-postmark-api-key
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
+```
+
+### 4. Run the App Locally
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🧪 Run Tests
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run test
+```
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 📤 API Endpoint
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**POST** `/api/send-mail`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Body Parameters
 
-## Deploy on Vercel
+```json
+{
+  "userFirstName": "John",
+  "referredUserName": "Jane",
+  "courseName": "Full Stack Web Dev",
+  "currency": "USD",
+  "referralAmount": "25",
+  "email": "jane@example.com"
+}
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🚀 Deployment
+
+Auto-deployed to [Vercel](https://vercel.com/) via GitHub Actions on push to `main` or PR merge.
+
+> PR-based deployments also run automated tests before deployment.
+
+---
+
+## 📎 Useful Links
+
+* 🔗 [Live App](https://tuteria-case-study.vercel.app)
+* 📁 [GitHub Repo](https://github.com/skinbo-emmanuel/tuteria-case-study)
+* ✅ [Latest Deployed PR](https://github.com/skinbo-emmanuel/tuteria-case-study/pull/1)
+
+---
+
+## 👨‍💻 Author
+
+**Emmanuel Akinbo**
+[LinkedIn](https://linkedin.com/in/emmanuel-akinbo) • [GitHub](https://github.com/skinbo-emmanuel)
