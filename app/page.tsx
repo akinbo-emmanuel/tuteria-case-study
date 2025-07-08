@@ -30,10 +30,12 @@ export default function Home() {
       body: JSON.stringify(formData),
     });
 
+    const data = await res.json();
+
     if (res.ok) {
       setStatus("Email sent successfully!");
     } else {
-      setStatus("Something went wrong.");
+      setStatus(data.error);
     }
 
     setLoading(false);
