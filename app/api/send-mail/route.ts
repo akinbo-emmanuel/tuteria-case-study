@@ -24,7 +24,7 @@ export async function POST(req: Request) {
   try {
     // 1. Send email
     await postmark.sendEmailWithTemplate({
-      From: "your-verified-sender@domain.com",
+      From: "emmanuel.akinbo@huntrsync.com",
       To: email,
       TemplateAlias: "medbuddy_referral_followup",
       TemplateModel: {
