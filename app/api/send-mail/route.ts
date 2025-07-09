@@ -1,20 +1,21 @@
 import { createClient } from "@supabase/supabase-js";
 import { NextResponse } from "next/server";
-import { Client as PostmarkClient } from "postmark";
+import { Resend } from "resend";
 
 // Check environment variables
 if (!process.env.SUPABASE_URL || !process.env.SUPABASE_ANON_KEY) {
   throw new Error("Supabase credentials are not set.");
 }
-if (!process.env.POSTMARK_API_KEY) {
-  throw new Error("Postmark API key is not set.");
+if (!process.env.RESEND_API_KEY) {
+  throw new Error("Resend API key is not set.");
 }
 
 const supabase = createClient(
   process.env.SUPABASE_URL,
   process.env.SUPABASE_ANON_KEY
 );
-const postmark = new PostmarkClient(process.env.POSTMARK_API_KEY);
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req: Request) {
   try {
@@ -76,33 +77,45 @@ export async function POST(req: Request) {
     }
 
     // Send email
-    let emailResponse;
     try {
-      emailResponse = await postmark.sendEmailWithTemplate({
-        From: "emmanuel.akinbo@huntrsync.com",
-        To: email,
-        TemplateAlias: "medbuddy_referral_followup",
-        TemplateModel: {
-          user_first_name: userFirstName,
-          referred_user_name: referredUserName,
-          course_name: courseName,
-          currency,
-          referral_value: referralAmount,
-          referral_tracking_page_url: `${process.env.NEXT_PUBLIC_SITE_URL}/app/referrals`,
-          recipient: email,
-        },
+      await resend.emails.send({
+        from: "Emmanuel Akinbo <emmanuel.akinbo@huntrsync.com>",
+        to: email,
+        subject: "You've been referred to MedBuddy!",
+        html: `
+  <div style="font-family: Arial, sans-serif; background-color: #f9fafb; padding: 40px;">
+    <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); padding: 30px;">
+      <h2 style="color: #1a202c;">Hi ${userFirstName},</h2>
+      <p style="font-size: 16px; color: #4a5568; line-height: 1.5;">
+        <strong>${referredUserName}</strong> has referred you to join the course 
+        <strong>${courseName}</strong> on MedBuddy.
+      </p>
+      <p style="font-size: 16px; color: #4a5568; line-height: 1.5;">
+        As a reward, you’re eligible to earn <strong>${currency}${referralAmount}</strong> when you participate.
+      </p>
+      <div style="text-align: center; margin: 30px 0;">
+        <a href="${process.env.NEXT_PUBLIC_SITE_URL}/app/referrals" 
+           style="display: inline-block; background-color: #2b6cb0; color: #ffffff; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-size: 16px;">
+          Track Your Referral
+        </a>
+      </div>
+      <p style="font-size: 14px; color: #718096;">
+        If you have any questions, feel free to reach out to our support team.
+      </p>
+      <p style="font-size: 14px; color: #a0aec0; margin-top: 30px;">
+        — The MedBuddy Team
+      </p>
+    </div>
+  </div>
+`,
       });
-    } catch (emailError) {
-      console.error("Postmark send error:", emailError);
+    } catch (emailError: any) {
+      console.error("Resend send error:", emailError);
       return NextResponse.json(
-        { success: false, error: "Failed to send email." },
-        { status: 502 }
-      );
-    }
-
-    if (emailResponse?.Message !== "OK") {
-      return NextResponse.json(
-        { success: false, error: "Email not acknowledged by Postmark." },
+        {
+          success: false,
+          error: emailError?.message || "Failed to send email.",
+        },
         { status: 502 }
       );
     }
