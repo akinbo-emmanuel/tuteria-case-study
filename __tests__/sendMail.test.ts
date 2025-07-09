@@ -1,9 +1,9 @@
+// Set env vars
 process.env.SUPABASE_URL = "http://localhost:54321";
 process.env.SUPABASE_ANON_KEY = "test-anon-key";
-process.env.POSTMARK_API_KEY = "test-postmark-key";
+process.env.RESEND_API_KEY = "test-resend-key"; // Updated for Resend
 
 import { POST } from "@/app/api/send-mail/route";
-
 import { NextRequest } from "next/server";
 
 // Mock Supabase
@@ -23,16 +23,16 @@ jest.mock("@supabase/supabase-js", () => ({
   }),
 }));
 
-// Mock Postmark
-jest.mock("postmark", () => ({
-  Client: function () {
-    return {
-      sendEmailWithTemplate: jest.fn().mockResolvedValue({
-        Message: "OK", // ✅ Add this to satisfy the condition
-      }),
-    };
-  },
-}));
+// Mock Resend
+jest.mock("resend", () => {
+  return {
+    Resend: jest.fn().mockImplementation(() => ({
+      emails: {
+        send: jest.fn().mockResolvedValue({}),
+      },
+    })),
+  };
+});
 
 // Helper to mock NextRequest with JSON body
 function mockRequest(body: any): NextRequest {
@@ -54,7 +54,7 @@ describe("POST /api/send-mail", () => {
 
     const res = await POST(req);
     const json = await res.json();
-    console.log("Response JSON:", json); // <--- Add this line
+    console.log("Response JSON:", json);
     expect(json.success).toBe(true);
   });
 });
