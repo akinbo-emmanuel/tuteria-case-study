@@ -102,7 +102,7 @@ Auto-deployed to [Vercel](https://vercel.com/) via GitHub Actions on push to `ma
 
 * 🔗 [Live App](https://tuteria-case-study.vercel.app)
 * 📁 [GitHub Repo](https://github.com/skinbo-emmanuel/tuteria-case-study)
-* ✅ [Latest Deployed PR](https://github.com/skinbo-emmanuel/tuteria-case-study/pull/1)
+* ✅ [Latest Deployed PR](https://github.com/skinbo-emmanuel/tuteria-case-study/pull/10)
 
 ---
 
