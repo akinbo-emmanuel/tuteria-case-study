@@ -1,12 +1,12 @@
 # 📩 Tuteria Case Study
 
-A full-stack application built with **Next.js**, **Supabase**, and **Postmark** that allows users to send referral emails using a predefined template. The app is automatically deployed using **GitHub Actions** and hosted on **Vercel**.
+A full-stack application built with **Next.js**, **Supabase**, and **Resend** that allows users to send referral emails using a predefined template. The app is automatically deployed using **GitHub Actions** and hosted on **Vercel**.
 
 ---
 
 ## 🚀 Features
 
-- Send referral emails via Postmark
+- Send referral emails via Resend
 - Store referral data in Supabase
 - API route built with Next.js App Router
 - Responsive UI with Tailwind CSS
@@ -19,7 +19,7 @@ A full-stack application built with **Next.js**, **Supabase**, and **Postmark** 
 
 - **Frontend**: Next.js 14, Tailwind CSS
 - **Backend**: Supabase (PostgreSQL + API)
-- **Email Service**: Postmark (Template-based)
+- **Email Service**: Resend (Template-based)
 - **CI/CD**: GitHub Actions + Vercel
 
 ---
@@ -44,9 +44,14 @@ npm install
 Create a `.env.local` file and add:
 
 ```env
+# Email Provider Configuration
+RESEND_API_KEY=your_resend_api_key
+
+# Supabase Configuration
 SUPABASE_URL=your-supabase-url
 SUPABASE_ANON_KEY=your-supabase-anon-key
-POSTMARK_API_KEY=your-postmark-api-key
+
+# Site Configuration
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
 ```
 
@@ -97,7 +102,7 @@ Auto-deployed to [Vercel](https://vercel.com/) via GitHub Actions on push to `ma
 
 * 🔗 [Live App](https://tuteria-case-study.vercel.app)
 * 📁 [GitHub Repo](https://github.com/skinbo-emmanuel/tuteria-case-study)
-* ✅ [Latest Deployed PR](https://github.com/skinbo-emmanuel/tuteria-case-study/pull/1)
+* ✅ [Latest Deployed PR](https://github.com/skinbo-emmanuel/tuteria-case-study/pull/10)
 
 ---
 
