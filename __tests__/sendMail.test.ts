@@ -1,7 +1,7 @@
 // Set env vars
 process.env.SUPABASE_URL = "http://localhost:54321";
 process.env.SUPABASE_ANON_KEY = "test-anon-key";
-process.env.RESEND_API_KEY = "test-resend-key"; // Updated for Resend
+process.env.RESEND_API_KEY = "test-resend-key";
 
 import { POST } from "@/app/api/send-mail/route";
 import { NextRequest } from "next/server";
